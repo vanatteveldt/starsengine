@@ -47,10 +47,22 @@ Orders
 An order is a file containing one player's turn orders.
 
 + player (id)
-+ fleetorders
++ fleetorders (list)
   + fleet (id)
   + x
   + y
   + warp
 
 
+Example json file 
+====
+
+To show how the bulleted lists are to be interpreted, below is an example json file for orders:
+
+```json
+{"player": 1,
+ "fleetorders": [
+   {"fleet": 1, "x": 120, "y": 120}
+ ]
+}
+```
