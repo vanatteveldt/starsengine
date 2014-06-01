@@ -23,6 +23,7 @@ No effort is made to separate 'permanent' (star location) from 'variable' inform
   + tech_levels (list or dict of int range 0-26)
   + tech_invested (list or dict of int with # of points invested)
 + planets (list)
+  + id  
   + name (string)
   + x
   + y
