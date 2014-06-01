@@ -21,6 +21,19 @@ def get_fleet(universe, fleet_id):
     """
     return get_object(universe, "fleets", fleet_id)
 
+
+def get_planet(universe, planet_id):
+    """
+    Get a planet by id.
+    """
+    return get_object(universe, "planets", planet_id)
+
+def get_owner(universe, obj):
+    """
+    Get the owner of the given object, which should have a 'owner' attribute
+    """
+    return get_object(universe, "players", obj['owner'])
+
 def calc_distance(a, b):
     """
     Compute the distance between a and b

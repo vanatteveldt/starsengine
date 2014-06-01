@@ -1,5 +1,4 @@
 from nose.tools import assert_equal, assert_not_equal
-from contextlib import contextmanager
 
 from engine import move_fleets
 from engine.tools import get_fleet

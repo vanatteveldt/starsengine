@@ -7,11 +7,12 @@ Stars order of events
 # TODO: add in crowding
 # TODO: deal with overcrowding
 
-def run(universe, orders):
+from .tools import get_owner
+
+def run(universe, orders=None):
     for planet in universe['planets']:
         if 'population' in planet:
-            assert 'owner' in planet
-            race = get_race(planet['owner'])
-            pgr = (100 + race['pop_growth']) / 100.
+            player = get_owner(universe, planet)
+            pgr = (100 + player['pop_growth']) / 100.
             planet['population'] = int(planet['population']) * pgr
     return universe
