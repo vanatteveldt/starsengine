@@ -31,3 +31,21 @@ def process_turn(universe, orders):
    universe = remote_terraform(universe, orders) 
    return universe
 ```
+
+Testing
+====
+
+Unit testing is important for any good program, but especially for 'backend' code test-driven development is a great way to write good code.
+The basic idea of test driven development is that you write unit tests before writing the actual code, 
+and add specific tests for any corner case you can think of.
+During development, you don't run the normal code or separate __main__ code to test, but use the unit tests for this.
+
+We currently use nose tests, which can be used simply by typing `nosetests` from the console in the repository folder (or in your favourite IDE). You can also specify a specific test to run, e.g. `nosetests tests/test_pop_growth.py`. 
+
+Every push is also automatically unit tested by travis, and a developer that 'breaks' a build will get an automatic email about it. 
+
+
+
+
+
+
