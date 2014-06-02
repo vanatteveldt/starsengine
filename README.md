@@ -42,6 +42,21 @@ During development, you don't run the normal code or separate __main__ code to t
 
 We currently use nose tests, which can be used simply by typing `nosetests` from the console in the repository folder (or in your favourite IDE). You can also specify a specific test to run, e.g. `nosetests tests/test_pop_growth.py`. 
 
+```bash
+(master) ~/starsengine$ nosetests
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.006s
+
+OK
+ (master) ~/starsengine$ nosetests tests/test_pop_growth.py
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK
+```
+
 Every push is also automatically unit tested by travis, and a developer that 'breaks' a build will get an automatic email about it. 
 
 
