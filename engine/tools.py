@@ -44,29 +44,39 @@ def calc_distance(a, b):
 def get_hab(planet, player):
     """
     Compute the hab value for a planet for a given player
+
+    planet['hab'] is a list: [grav,temp,rad]
+    player['hab'] is a list of lists: [[min_grav,max_grav,centre_grav], ...]
+    Any inner list may be replaced by the string "immune".
+    e.g.: ["Immune",[20,80,0],[30,70,0]]
+    Note that in the current stars! race wizard the center is always in the
+     middle between min and max.
     """
     planet_value_points=0
     ideality=10000
     red_value=0
-    
-    for i in range(0,3):
-        distance=abs(player['hab'][i][3] - planet['hab'][i])
-        if planet['hab'][i] > player['hab'][i][3]:
-            radius=player['hab'][i][2] - player['hab'][i][3]
-        else:
-            radius=player['hab'][i][3] - player['hab'][i][1]
-        if player['hab'][i] = "immune":
-            planet_value_points += 10000
-        elif planet['hab'][[i] < player['hab'][i][2] and planet['hab'][i] > player['hab'][i][1]:
-            excent=100-(int(100*distance/radius)
-            planet_value_point =+ excent^2
-            if distance *2 > radius: #Outer quarter of hab range gets a penalty
-                ideality=ideality*(3/2 - (distance/radius))
-        else: #Red on this variable
-            red_value+=max(-15,radius-distance)
 
-    if red_value != 0:
+    for player_hab, planet_hab in zip(player['hab'], planet['hab']):
+        if player_hab == "immune":
+            planet_value_points += 10000
+        else:
+            pmin, pmax, pcent = player_hab
+            distance=abs(pcent - planet_hab)
+            if planet_hab > pcent:
+                radius=pmax - pcent
+            else:
+                radius=pcent - pmin
+            if pmin < planet_hab < pmax:
+                excent=100- (100*distance // radius)
+                planet_value_points += excent ** 2
+                if distance *2 > radius:
+                    #Outer quarter of hab range gets a penalty
+                    ideality=ideality*(3/2 - (distance/radius))
+            else: #Red on this variable
+                red_value += max(-15, radius - distance)
+
+    if red_value:
         return red_value
-    planet_value_points = sqrt(planet_value_points/3)+0.9
+    planet_value_points = math.sqrt(planet_value_points/3)+0.9
     planet_value_points = planet_value_points * int(ideality)/10000
     return int(planet_value_points)
