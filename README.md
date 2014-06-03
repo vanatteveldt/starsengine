@@ -40,7 +40,26 @@ The basic idea of test driven development is that you write unit tests before wr
 and add specific tests for any corner case you can think of.
 During development, you don't run the normal code or separate __main__ code to test, but use the unit tests for this.
 
-We currently use nose tests, which can be used simply by typing `nosetests` from the console in the repository folder (or in your favourite IDE). You can also specify a specific test to run, e.g. `nosetests tests/test_pop_growth.py`. 
+Setting up the testing environment
+----
+
+We currently use nose tests. On linux systems and presumably on Mac, it is important to tell nosetests to run python3 instead of the python2 that is often still installed by default. The best way to do this is in a virtual environment:
+
+```bash
+sudo apt-get install python-virtualenv python3
+virtualenv -p /usr/bin/python3 env
+source env/bin/activate
+pip install nose
+```
+
+(the first line is debian/ubuntu specific, but it should be easy to install virtualenv and python3 on other systems as well)
+
+Running tests 
+----
+
+which can be used simply by typing `nosetests` from the console in the repository folder (or in your favourite IDE). You can also specify a specific test to run, e.g. `nosetests tests/test_pop_growth.py`. 
+
+If you use a virtual environment such as described above, be sure to run `source env/bin/activate` before running any tests.
 
 ```bash
 (master) ~/starsengine$ nosetests
