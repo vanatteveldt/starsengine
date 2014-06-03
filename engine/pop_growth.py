@@ -3,9 +3,6 @@ Stars order of events
 19. Population grows/dies
 """
 
-# TODO: deal with overcrowding (confirm formula, I made one up!)
-# TODO: deal with red planets
-
 from .tools import get_owner, get_hab
 
 def run(universe, orders=None):
@@ -17,7 +14,7 @@ def run(universe, orders=None):
 
 def new_population(planet, player)
     pgr = player['pop_growth']
-    hab = get_hab(planet, player)
+    hab = get_hab(planet, player)/100
     if player['prt']="HE":
         pgr=pgr*2
     elif player['prt']="AR":
@@ -40,15 +37,18 @@ def new_population(planet, player)
     if player['obrm']:
         max_pop=max_pop*1.1
 
-    growth=(100+pgr)/100
+    growth=(100+pgr)/100 * hab
 
-    if planet['population'] <= (.25 * max_pop):
+    if hab < 0: #RED planets kill at 10% of their -ve value
+        return int(planet['population'] * (1-(hab/10))
+    elif planet['population'] <= (.25 * max_pop): # Uncrowded planet growth is unrestricted
         return int(planet['population'] * growth)    
-    if planet['population'] <= max_pop:
+    elif planet['population'] <= max_pop: # Crowding reduces growth
         crowding=16/9*(1-planet['population']/max_pop)^2
         return int(planet['population'] * growth * crowding)
-    if planet['population'] > max_pop:
-        over_pop=(planet['population']-*max_pop)
-        death=over_pop*over_pop/max_pop #Excess pop dies at the rate at which is it overpopped. FIXME
-        return int(planet['population']-death)
+    elif planet['population'] >= 4*max_pop: # Massive overpop dies at 12%
+        return int(planet['population'] * (1-.12))
+    else: # Overpop death is linear up to 12%
+        over_pop=(planet['population']-max_pop)/(3*max_pop)
+        return int(planet['population'] * (1-((1-over_pop)*.12)) )
         
