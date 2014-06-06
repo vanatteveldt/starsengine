@@ -2,7 +2,7 @@
 Stars! turn processing
 """
 
-from . import move_fleets, pop_growth
+from . import move_fleets, pop_growth, mining
 
 def process_turn(universe, orders):
     """
@@ -35,6 +35,8 @@ def process_turn(universe, orders):
     # 14 Wormhole endpoints degrade/jump
     # 15. SD Minefields detonate (possibly damaging again fleet that hit minefield during movement)
     # 16. Mining
+    universe = mining.run(universe, orders)
+
     # 17. Production (incl. research, packet launch, fleet/starbase construction)
     # 18. SS Spy bonus obtained
     # 19. Population grows/dies
