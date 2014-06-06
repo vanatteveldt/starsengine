@@ -80,3 +80,20 @@ def get_hab(planet, player):
     planet_value_points = math.sqrt(planet_value_points/3)+0.9
     planet_value_points = planet_value_points * int(ideality)/10000
     return int(planet_value_points)
+
+def get_max_factories(planet, player):
+    """
+    How many factories can the player operate?
+    """
+    return int(planet['population'] * player['factories']['max'] / 10000)
+
+def get_resources(planet, player):
+    """
+    Compute the resource production of the given planet and player
+    """
+    prod = int(planet['population'] / player['pop_efficiency'])
+    factories = planet['installations'].get('factories')
+    if factories:
+        factories = min(factories, int(planet['population'] * player['factories']['max'] / 10000))
+        prod += math.ceil(factories * player['factories']['efficiency'] / 10)
+    return prod

@@ -38,6 +38,8 @@ def process_turn(universe, orders):
     universe = mining.run(universe, orders)
 
     # 17. Production (incl. research, packet launch, fleet/starbase construction)
+    universe = production.run(universe, orders)
+
     # 18. SS Spy bonus obtained
     # 19. Population grows/dies
     universe = pop_growth.run(universe, orders)
