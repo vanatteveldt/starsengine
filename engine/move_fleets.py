@@ -11,7 +11,6 @@ def run(universe, orders):
     for order in orders:
         for fleetorder in order.get('fleetorders', []):
             move_fleet(universe, fleetorder)
-    return universe
 
 def move_fleet(universe, fleetorder):
     fleet = get_fleet(universe, fleetorder['fleet'])
@@ -25,5 +24,3 @@ def move_fleet(universe, fleetorder):
         frac = speed / dist
         for coord in ('x', 'y'):
             fleet[coord] += int(frac * (fleetorder[coord] - fleet[coord]))
-
-    return universe

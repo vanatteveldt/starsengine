@@ -20,5 +20,5 @@ def mine(planet, player):
     mines = planet['installations'].get('mines')
     if mines:
         for mineral, conc in planet['mineral_concentration'].items():
-            mined = int(conc * mines * player['mining']['efficiency'] / 1000)
+            mined = int(conc * mines * player['mines']['efficiency'] / 1000)
             planet['mineral_surface'][mineral] += mined

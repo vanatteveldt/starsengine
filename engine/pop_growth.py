@@ -12,7 +12,6 @@ def run(universe, orders=None):
         if 'population' in planet:
             player = get_owner(universe, planet)
             planet['population'] = new_population(planet, player)
-    return universe
 
 def new_population(planet, player):
     hab = get_hab(planet, player)

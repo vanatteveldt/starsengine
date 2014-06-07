@@ -9,7 +9,7 @@ def test_growth():
               "installations": {"mines": 10}
               }
     player = {"id": 1,
-              "mining": {"max": 10, "efficiency": 10}
+              "mines": {"max": 10, "efficiency": 10}
               }
 
     result = mining.run({"planets": [planet], "players": [player]}, None)
