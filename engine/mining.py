@@ -3,6 +3,10 @@ Stars order of events
 16. Mining
 """
 
+# TODO:
+# - Mineral depletion (see http://starsautohost.org/sahforum2/index.php?t=msg&th=5405&prevloaded=1&rid=1803&start=150#msg_num_6)
+# - AR
+
 from .tools import get_owner
 
 def run(universe, orders=None):
